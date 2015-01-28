@@ -1,0 +1,17 @@
+<template name="environmentDescriptors">
+
+<div class="row">
+	<div class="col-md-4">
+		{{> descriptorNav}}
+	</div>
+	<div class="col-md-8">
+		{{#if descriptor}}
+			{{> descriptorSettings}}
+		{{else}}
+			<p>Please select or create an item descriptor</p>
+		{{/if}}
+	</div>
+</div>
+
+
+</template>

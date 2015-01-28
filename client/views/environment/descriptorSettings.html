@@ -1,0 +1,45 @@
+<template name="descriptorSettings">
+	<h2>Settings for {{descriptor.name}}</h2>
+	<hr />
+	
+	<form id="descriptorForm">
+		<div class="form-group">
+			<label for="description">Description</label>
+			<input type="text" class="form-control" value="{{descriptor.description}}" name="env-description" placeholder="The Description of this descriptor" />
+		</div>
+
+		<hr />
+		<h3>Item Attributes</h3>
+		<a href="#" id="addEnvironmentAttribute">+ Add Attribute</a>
+
+		<div id="attributes">
+			{{#each descriptor.fields}}
+			<div class="descriptorAttribute well well-sm">
+				<div class="attributeRemove">
+					<a href="#" class="btn btn-default attributeRemove"><i class="fa fa-trash fa-2"></i></a>
+				</div>
+				<input type="hidden" name="id" value="{{_id}}" />
+
+				<div class="form-group">
+					<label for="description">Name</label>
+					<input type="text" class="form-control" value="{{name}}" name="name" placeholder="Name of property" />
+				</div>
+
+				<div class="form-group">
+					<label for="description">Type</label>
+					<input type="text" class="form-control" value="{{type}}" name="type" placeholder="Type of property" />
+				</div>
+
+				<div class="form-group">
+					<label for="description">Help</label>
+					<input type="text" class="form-control" value="{{help}}" name="help" placeholder="Help Text to display for property" />
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		<hr />
+		<a href="#" id="descriptorSubmit" class="btn btn-success">Update</a>
+		<br /><br />
+	</form>
+
+</template>

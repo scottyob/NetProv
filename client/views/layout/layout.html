@@ -1,0 +1,38 @@
+  <head>
+    <title>Network Provisioner</title>
+  </head>
+
+  <template name="ApplicationLayout">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Network Provisioner</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="{{active 'deviceSetup'}}"><a href="/deviceSetup">Device Setup</a></li>
+            <li class="{{active 'environment'}}"><a href="/environment">Environment</a></li>
+            <li class="{{active 'templates'}}"><a href="/templates">Templates</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+
+		{{> yield}}
+
+<!--       <div class="starter-template">
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div>
+ -->
+    </div><!-- /.container -->
+  </template>

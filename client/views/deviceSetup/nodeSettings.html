@@ -1,0 +1,22 @@
+<template name="nodeSettings">
+
+    <ul class="nav nav-tabs">
+        <li class="nav active"><a href="#NodeProperties" data-toggle="tab">Node Properties</a></li>
+        <li class="nav"><a href="#TemplateView" data-toggle="tab">Generated Template</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div class="tab-pane fade in active" id="NodeProperties">
+            {{> nodeProperties}}
+        </div>
+
+        <div class="tab-pane fade" id="TemplateView">
+            Content inside tab B
+        </div>
+
+    </div>
+
+
+</template>

@@ -1,0 +1,13 @@
+//Compiling server side templates
+
+
+
+
+> str = "Hi {{name}}"
+'Hi {{name}}'
+> str
+'Hi {{name}}'
+> OriginalHandlebars.compile(str)
+[Function]
+> OriginalHandlebars.compile(str)({'name': 'bob'})
+'Hi bob'

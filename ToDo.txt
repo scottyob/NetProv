@@ -1,0 +1,14 @@
+ToDo.txt
+
+
+-- Add these back in:
+scott@MacGyver-3 ~/D/P/n/netProv> meteor list
+arch:ace-editor          1.1.1  Integrating Ace editor with Meteor since 2015
+fortawesome:fontawesome  4.2.0_2  Font Awesome (official): 470+ scalable vector icons, customizable via C...
+insecure                 1.0.2  Allow all database writes by default
+iron:router              1.0.6  Routing specifically designed for Meteor
+linto:fancytree          2.4.1  2.4.1 with win8 theme
+meteor-platform          1.2.1  Include a standard set of Meteor packages in your app
+mrt:bootstrap-3          0.3.8  Provides bootstrap 3.
+mrt:moment               2.8.1  Moment.js, a JavaScript date library for dates, packaged for Meteor. See ...
+reactive-var             1.0.4  Reactive variable

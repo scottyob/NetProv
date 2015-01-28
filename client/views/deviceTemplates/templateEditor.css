@@ -1,0 +1,15 @@
+#TemplateFileBrowser ul.fancytree-container {
+	border: none !important;
+	outline:none !important;
+}
+
+#editingTemplateStatus {
+	color: gray;
+	font-style: italic;
+}
+
+.ui-menu {
+	width: 100px;
+	font-size: 73%;
+	z-index: 3; /* over ext-wide titles */
+}
