@@ -4,19 +4,22 @@
 
 	<h2>Devices</h2>
 
-	<table>
-		<header>
+	<table class="table table-striped">
+		<thead>
+			<th class="col-md-1">Status</th>
 			<th>Device</th>
-			<th>Status</th>
-		</header>
-		<tr>
-			<td>SomeDevice</td>
-			<td>SomeStatus</td>
-		</tr>
+			<th>Last Checked Done</th>
+		</thead>
+		<tbody>
+			{{#each devices}}
+			<tr>
+				<td style="col-md-123"><i class="fa fa-circle fa-2 status-icon-{{status}}"></i></td>
+				<td>{{name}}</td>
+				<td>{{lastChecked}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
 	</table>
-
-	<p>Device Status Here</p>
-
 
 
 </template>

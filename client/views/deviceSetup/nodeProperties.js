@@ -33,8 +33,8 @@ var returnSchemaForNode = function(node, descriptor_node) {
 }
 
 Template.nodeProperties.helpers({
-  contactFormSchema: function() {
-  	return returnSchemaForNode(this.environment_node, this.descriptor_node);
+  editPropertiesSchema: function() {
+    return returnSchemaForNode(this.environment_node, this.descriptor_node);
   }
 });
 

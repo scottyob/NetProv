@@ -1,11 +1,11 @@
 <template name="deviceSetup">
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-4">
 		{{> deviceSetupNav}}
 	</div>
-	<div class="col-md-9">
-		<h1>Device {{environment_node.name}}</h1>
+	<div class="col-md-8">
+		<h3>{{descriptor_node.type}} {{descriptor_node.name}}: {{environment_node.name}}</h3>
 		{{#if id}}
 			{{> nodeSettings}}
 		{{else}}

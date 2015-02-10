@@ -104,7 +104,9 @@ if (Meteor.isServer) {
     			under: NaN,
     			name: '65001',
     			type: 'ASN',
-    			ASN: 65001
+    			fields: {
+    				ASN: 65001
+    			}
     		}
     	];
     	_.each(device_elements, function(template) {

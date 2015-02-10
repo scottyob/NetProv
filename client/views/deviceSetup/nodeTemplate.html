@@ -1,0 +1,12 @@
+<template name="nodeTemplate">
+
+	{{#if templateAvailable }}
+		{{> templateViewer}}
+	{{else}}
+		<div class="bg-danger">
+			<p>
+				Templates are only available for devices
+			</p>
+		</div>
+	{{/if}}
+</template>

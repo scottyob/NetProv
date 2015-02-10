@@ -1,23 +1,29 @@
 Router.map( function() {
 	this.route('deviceStatus', {
-		path: '/:_id?',
+		path: ['/', '/status/:_id?'] ,
 		waitOn: function() {
-			return Meteor.subscribe('environment');
+			return [
+				Meteor.subscribe('environment'),
+				Meteor.subscribe('environment_descriptors')
+			];
         },
 		data: function() {
-			return {}			
-			// var environment_node = EnvironmentNodes.findOne({_id: this.params._id})
-			// var descriptor_node = NaN;
-			// if(environment_node)
-			// 	descriptor_node = EnvironmentDescriptors.findOne({name: environment_node.type});
-
-			// return {
-   //              'id': this.params._id,
-   //              'environment_node': environment_node,
-   //              'descriptor_node': descriptor_node
-			// }
+			return {
+				'devices': getDevices()
+			}			
 		}
 	}, {
 		name: "deviceStatus"
 	})
 });	
+
+Template.deviceStatus.helpers( {
+	status: function() {
+		if(typeof this.status === 'undefined')
+			return "error";
+	},
+	lastChecked: function() {
+		if(typeof this.lastChecked === 'undefined')
+			return "Never Checked!";
+	}
+})
