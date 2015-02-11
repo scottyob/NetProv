@@ -26,7 +26,7 @@ if (Meteor.isServer) {
 	    		under: ["ASN"],
 	    		fields: [
 	    			{
-	    				name: 'Name',
+	    				name: 'country',
 	    				type: 'String',
 	    				help: 'The Name of the Country (eg. Australia)'
 	    			}
@@ -39,7 +39,7 @@ if (Meteor.isServer) {
 	    		under: ["Country"],
 	    		fields: [
 	    			{
-	    				name: 'Name',
+	    				name: 'state',
 	    				type: 'String',
 	    				help: 'The Name of the State (eg. NSW)'
 	    			}
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
 	    		under: ["State"],
 	    		fields: [
 	    			{
-	    				name: 'Name',
+	    				name: 'POP',
 	    				type: 'String',
 	    				help: 'The location of the POP (eg. UOW)'
 	    			}
@@ -76,7 +76,38 @@ if (Meteor.isServer) {
 						help: 'Contact details for the owner.  Used in SNMP descriptions'
 					}
 				]
+			}, 
+			{
+				name : "BGP_Peer",
+				description : "BGP Peer",
+				type : "Element",
+				under : [
+					"generic-router"
+				],
+				fields : [
+					{
+						name : "ASN",
+						type : "Number",
+						help : "The ASN of the peer"
+					}
+				]
+			},
+			{
+				name : "v4_address",
+				description : "Peer (ipv4) Address",
+				type : "Element",
+				under : [
+					"BGP_Peer"
+				],
+				fields : [
+					{
+						name : "address",
+						type : "String",
+						help : "The IPv4 Address of the peer"
+					}
+				]
 			}
+
     	];
     	_.each(descriptors, function(descriptor) {
     		EnvironmentDescriptors.insert(descriptor);
@@ -99,20 +130,70 @@ if (Meteor.isServer) {
     }
 
     if( !EnvironmentNodes.find().count() ) {
-    	var device_elements = [
-    		{
-    			under: NaN,
-    			name: '65001',
-    			type: 'ASN',
-    			fields: {
-    				ASN: 65001
-    			}
-    		}
-    	];
-    	_.each(device_elements, function(template) {
-    		EnvironmentNodes.insert(template);
-    	})
-    }
 
+    	var id = EnvironmentNodes.insert({
+			"under" : NaN,
+			"name" : "65001",
+			"type" : "ASN",
+			"ASN" : 65001,
+		});
+
+		id = EnvironmentNodes.insert(
+			{
+				"name": "Australia",
+				"country" : "Australia",
+				"type" : "Country",
+				"under" : id
+			});
+
+		id = EnvironmentNodes.insert(
+			{
+				"name" : "NSW",
+				"state" : "NSW",
+				"type" : "State",
+				"under" : id
+			});
+
+		id = EnvironmentNodes.insert(
+			{
+				"name" : "Globalswitch-Sydney",
+				"POP" : "Globalswitch Sydney",
+				"type" : "POP_Location",
+				"under" : id
+			});
+
+		id = EnvironmentNodes.insert(
+			{
+				"comment" : "The core router in Globalswitch",
+				"name" : "cor3.syd2.company.com",
+				"owner" : "Scott O'Brien, +61 415 712 345",
+				"type" : "generic-router",
+				"under" : id
+			});
+
+		id = EnvironmentNodes.insert(
+			{
+				"ASN" : 7575,
+				"name" : "AARNet",
+				"type" : "BGP_Peer",
+				"under" : id
+			});
+
+		EnvironmentNodes.insert(
+			{
+				"address" : "1.1.1.2",
+				"name" : "Primary",
+				"type" : "v4_address",
+				"under" : id
+			})
+
+		EnvironmentNodes.insert(
+			{
+				"address" : "1.1.1.5",
+				"name" : "Secondary",
+				"type" : "v4_address",
+				"under" : id
+			});
+    }
   });
 }
