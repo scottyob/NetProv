@@ -63,6 +63,7 @@ if (Meteor.isServer) {
 				name: 'generic-router',
 				description: 'Represents a router on your network',
 	    		type: 'Device',
+	    		template: "EdgeRtr.cisco",
 				under: ['POP_Location'],
 				fields: [
 					{
@@ -122,6 +123,18 @@ if (Meteor.isServer) {
 			{
     			name: "DistRtr.cisco",
     			contents: "! Template 2, dsw\n! - Just a demo"
+    		},
+    		{
+    			name: "EdgeRtr.cisco",
+    			contents: "! Edge Router Partial Template\n\
+!\n\
+router bgp {{ASN}}\n\
+  {{#each BGP_Peer}}\n\
+  {{#each v4_address}}\n\
+  neigbour {{address}} remote-as {{ASN}}\n\
+  {{/each}}\n\
+  {{/each}}\n\
+"
     		}
     	];
     	_.each(device_templates, function(template) {

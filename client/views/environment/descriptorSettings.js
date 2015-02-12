@@ -7,6 +7,19 @@ Template.descriptorSettings.events({
 	}
 })
 
+Template.descriptorSettings.shouldShowTemplateSelect = function() {
+	var descriptor = Router.current().data().descriptor;
+	if (descriptor.type == 'Device')
+		return true;
+	return false;
+}
+
+Template.descriptorSettings.templateSelected = function() {
+	if(Router.current().data().descriptor.template == this.name)
+		return "selected"
+	return ""
+}
+
 Template.descriptorSettings.rendered = function() {
 
 	//Add Attribute
@@ -31,6 +44,11 @@ Template.descriptorSettings.rendered = function() {
 		// debugger;
 		var descriptor = Router.current().data().descriptor;
 		descriptor.description = $("#descriptorForm input[name='env-description']").val();
+		if(descriptor.type == 'Device') {
+			//This is a device, need to update the template it should be rendered from.
+			// descriptor.template = 
+			descriptor.template = $("select[name='env-template'] option:selected").text();
+		}
 
 		//Clear and re-add the descriptors.
 		descriptor.fields = []

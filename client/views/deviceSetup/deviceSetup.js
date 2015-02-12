@@ -11,7 +11,9 @@ Router.map( function() {
 		waitOn: function() {
 			return [
 				Meteor.subscribe('environment'),
-				Meteor.subscribe('environment_descriptors') ];
+				Meteor.subscribe('environment_descriptors'),
+				Meteor.subscribe('device_templates')
+				 ];
         },
 		data: function() {
 			

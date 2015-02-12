@@ -7,6 +7,17 @@
 			<label for="description">Description</label>
 			<input type="text" class="form-control" value="{{descriptor.description}}" name="env-description" placeholder="The Description of this descriptor" />
 		</div>
+		{{#if shouldShowTemplateSelect}}
+			<div class="form-group">
+				<label for="chooseTemplate">Template</label>
+				<select class="form-control" name="env-template" placeholder="The template for this device type">
+					{{#each templates}}
+						<option {{templateSelected}}>{{name}}</option>
+					{{/each}}
+				</select>
+			</div>
+		{{/if}}
+
 
 		<hr />
 		<h3>Item Attributes</h3>

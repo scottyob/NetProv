@@ -6,7 +6,14 @@ Template.templateViewer.rendered = function() {
 		mode:"text",
 		maxLines: Infinity,
 	}, function(editor) {
-		editor.session.setValue("Abc, 123");
+
+		Meteor.call( 'generateTemplateForDevice', Router.current().data().environment_node._id,
+			function(err, result) {
+				editor.session.setValue(result);				
+			} );
+
+		// editor.session.setValue(templateForDevice(Router.current().data().environment_node));
+		//editor.session.setValue("Abc, 123");
 		editor.setReadOnly(true);
 		// debugger;
 		//This function gets called when the editor is ready
