@@ -33,17 +33,13 @@ Template.descriptorSettings.rendered = function() {
 		EnvironmentDescriptors.update(descriptor._id, descriptor);
 	})
 
-	//Remove Attribute
-	// $("form#descriptorForm a.attributeRemove").on('click', function(item) {
-		// $(item.target)
-		// debugger;
-	// })
-
 	$("#descriptorSubmit").on('click', function() {
 		//Button to update the descriptor settings.
 		// debugger;
 		var descriptor = Router.current().data().descriptor;
 		descriptor.description = $("#descriptorForm input[name='env-description']").val();
+
+		//If this item is of a type of Device, then we need to add a few extra fields in.
 		if(descriptor.type == 'Device') {
 			//This is a device, need to update the template it should be rendered from.
 			// descriptor.template = 
@@ -63,15 +59,6 @@ Template.descriptorSettings.rendered = function() {
 
 		EnvironmentDescriptors.update(descriptor._id, descriptor);
 
-
-		// EnvironmentDescriptors.update(descriptor._id, 
-		// 	{
-		// 		set: {
-		// 			description: $("#descriptorForm input[name='env-description']").val()
-		// 		}
-		// 	})
-
-		// alert("Button pushed");
 	});
 
 }
