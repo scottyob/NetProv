@@ -8,4 +8,12 @@ Meteor.publish( "environment" ,function() {
 
 Meteor.publish( "device_templates", function() {
 	return DeviceTemplates.find();
-})
+});
+
+Meteor.publish( "app_settings", function() {
+	return AppSettings.find();
+});
+
+Meteor.publish('daemon_tasks', function() {
+	return DaemonTasks.find();
+});

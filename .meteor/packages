@@ -15,3 +15,6 @@ mrt:moment
 reactive-var
 cmather:handlebars-server
 aldeed:autoform
+aldeed:collection2
+kidovate:pnotify
+raix:eventemitter

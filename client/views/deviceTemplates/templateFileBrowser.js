@@ -10,7 +10,7 @@ Template.templateFileBrowser.rendered = function() {
         //ToDo:  Change the URL based on the Router.
 
         if(data.node.key) {
-          Session.set("DeviceTemplates_selected", data.node.key);
+          Router.go("/templates/" + data.node.title)
         }
       }
     });
@@ -56,10 +56,8 @@ Template.templateFileBrowser.rendered = function() {
           //ToDo:  Make this much prettier
           var name = prompt("What's the name of the template?");
           if(name) {
-            //Insert a new Device Template into our collection
-            DeviceTemplates.insert( {
-              'name': name,
-              'content': ''
+            Meteor.call('createTemplate', name, function(err, response) {
+              //ToDo:  Handle an error here
             });
           }
         }

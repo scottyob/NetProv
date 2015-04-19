@@ -1,0 +1,39 @@
+<template name="rancid">
+	
+	<div class="container-fluid">
+		<div class="row">
+			<h1>Rancid Config</h1>
+
+			<p>NetProv uses <a href="http://dotwaffle.github.io/rancid-git/">Rancid</a> at its core.
+			  NetProv will use the configuration files that have been collected by Rancid to perform
+			  the comparison of what needs to change and generate the list of changes to push out to the
+			  device.  Please make sure Rancid is installed before this software will of much use to you</p>
+
+			<h2>cloginrc file</h2>
+			<p>Below should go the cloginrc file that Rancid will use to both pull down the templates
+				and log into the box to make the appropriate config changes</p>
+
+			{{#autoForm collection="AppSettings" id="cloginrcForm" type="update" doc=cloginrc}}
+				{{> afQuickField name='value' rows=15 label='File Contents'}}
+				<button type="submit" class="btn btn-primary">Save</button>
+			{{/autoForm}}
+
+			<hr />
+			<h2>Generated Files</h2>
+			<p>This shows a list of generated files that are bootstraped into Rancid.  You generally don't
+				Have to worry about this.. Just helpful for debugging</p>
+		</div> <!-- Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<h3>devices.db</h3>
+				<pre>{{devicesDb}}</pre>
+			</div>
+<!-- 			<div class="col-md-6">
+				<p>Find a use for this later I guess...</p>
+			</div>
+ -->		</div> <!-- Row -->
+	</div> <!-- Container -->
+
+
+
+</template>

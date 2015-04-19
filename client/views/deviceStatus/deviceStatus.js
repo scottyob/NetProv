@@ -1,6 +1,6 @@
 Router.map( function() {
 	this.route('deviceStatus', {
-		path: ['/', '/status/:_id?'] ,
+		path: ['/', '/status'] ,
 		waitOn: function() {
 			return [
 				Meteor.subscribe('environment'),
@@ -25,5 +25,21 @@ Template.deviceStatus.helpers( {
 	lastChecked: function() {
 		if(typeof this.lastChecked === 'undefined')
 			return "Never Checked!";
+	}
+})
+
+Template.deviceStatus.events({
+	'click .action-refresh-device': function(element) {
+		// debugger;
+		var name = EnvironmentNodes.findOne( {_id: $(element.target).data("id") }).name
+		Meteor.call('messageDaemon', {request: 'update', hostname: name });
+
+		new PNotify({
+		    title: 'Requested Update',
+		    text: 'A request has been sent to collect the router config and perform a compliance check.',
+		    type: 'info',
+		    delay: 3000,
+		});
+
 	}
 })

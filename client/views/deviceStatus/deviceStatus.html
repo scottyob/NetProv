@@ -9,13 +9,15 @@
 			<th class="col-md-1">Status</th>
 			<th>Device</th>
 			<th>Last Checked Done</th>
+			<th>Actions</th>
 		</thead>
 		<tbody>
 			{{#each devices}}
 			<tr>
 				<td style="col-md-123"><i class="fa fa-circle fa-2 status-icon-{{status}}"></i></td>
-				<td>{{name}}</td>
+				<td><a href="/device/{{name}}">{{name}}</a></td>
 				<td>{{lastChecked}}</td>
+				<td><a href="" class="action-refresh-device" data-id="{{_id}}">Retreive Config</a></td>
 			</tr>
 			{{/each}}
 		</tbody>

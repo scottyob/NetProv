@@ -1,8 +1,16 @@
 <template name="templateEditor">
 	
-	<h1>Editing {{editingTemplate}}</h1>
+	<h1>Editing {{device_template.name}}</h1>
 	<hr />
+
+	{{#autoForm doc=device_template id="templateDeviceTypeForm" collection="DeviceTemplates" type="update"}}
+
+	{{> afQuickField name='deviceType'}}
+
 	<pre id="templateEditor"></pre>
+
 	<a id="SaveTemplateButton" href="#" class="btn btn-primary">Save Changes</a>  <span id="editingTemplateStatus">Not Loaded</span>
 
+	{{/autoForm}}
+	
 </template>

@@ -2,6 +2,13 @@
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+  	if( !AppSettings.find( {key: "cloginrcFile"}).count() ) {
+  		AppSettings.insert({
+  			key: "cloginrcFile",
+  			value: "! cloginrc file goes here"
+  		})
+  	}
+
     if( !EnvironmentDescriptors.find().count() ) {
     	//There are no environment descriptors in the database.  Load some up
 

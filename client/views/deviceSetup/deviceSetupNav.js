@@ -77,19 +77,20 @@ Template.deviceSetupNav.rendered = function() {
         },
 
         select: function(event, ui) {
+            var treeNode = $.ui.fancytree.getNode(ui.target);
             if(ui.cmd == "delete") {
-                console.log("ToDo:  Implement Deleting of node");
-                return;
+                Meteor.call('deleteDevice', treeNode.key)
+            } else {
+                //We are to add a new node
+                // debugger;
+                EnvironmentNodes.insert( {
+                    under: treeNode.key,
+                    name: "New Node",
+                    "type": ui.cmd
+                })    
             }
 
-            //We are to add a new node
-            var treeNode = $.ui.fancytree.getNode(ui.target);
-            // debugger;
-            EnvironmentNodes.insert( {
-                under: treeNode.key,
-                name: "New Node",
-                "type": ui.cmd
-            })
+            
             rebuildTree();
 
         }

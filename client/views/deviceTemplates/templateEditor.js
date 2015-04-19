@@ -1,17 +1,5 @@
 Template.templateEditor.rendered = function() {
 
-	//Build the editor window
-	AceEditor.instance("templateEditor",{
-		theme:"dawn",
-		mode:"text",
-		maxLines: Infinity
-	}, function(editor) {
-		//This function gets called when the editor is ready
-		editor.on("change", function(e) {
-			$("#editingTemplateStatus").text("Not Saved");
-		})
-	});
-
 	//Resize the ace window
 	function resizeAce() {
 		var newHeight = $(window).height() - $('#templateEditor').offset().top - 120;
@@ -19,48 +7,60 @@ Template.templateEditor.rendered = function() {
 			newHeight = 100;
  		return $('#templateEditor').height(newHeight);
 	};
-	$(window).resize(resizeAce);
+	$(window).resize(resizeAce); //Hook the resize ace componenet on window reload.
 	resizeAce();
 
-	//Bind the ACE window to the current item
-	Deps.autorun( function() {
-		var $id = Session.get("DeviceTemplates_selected");
-		if($id && ace) {
-			var device = DeviceTemplates.findOne({_id: $id});
-			var editor = ace.edit("templateEditor");
-			if(editor && editor.getSession() && editor.getSession().getValue() != device.contents)
-			{
-				editor.getSession().setValue(device.contents);
-				$("#editingTemplateStatus").text("Loaded " + device.name);
+	var hookTemplateRender = function() {
+		//Bind the ACE window to the current item
+		Deps.autorun( function() {
+			// var $id = Session.get("DeviceTemplates_selected");
+			var template = NaN;
+			// debugger;
+			if(Router.current().data().device_template)
+				template = Router.current().data().device_template;
+			if(template && (typeof ace !== 'undefined')) {
+				var editor = ace.edit("templateEditor");
+				if(editor && editor.getSession() && editor.getSession().getValue() != template.contents)
+				{
+					editor.getSession().setValue(template.contents);
+					$("#editingTemplateStatus").text("Loaded " + template.name);
+				}
 			}
-		}
-	});
+		});		
+	}
+
 
 	//Save button
 	$("#SaveTemplateButton").click(function() {
-		var id = Session.get("DeviceTemplates_selected");
+		var template = Router.current().data().device_template;
 		var editor = ace.edit("templateEditor");
-		if(id) {
-			var device = DeviceTemplates.findOne({_id: id});
-			device.contents = editor.getSession().getValue();
+		if(template && AutoForm.validateForm("templateDeviceTypeForm") ) {
+			template.contents = editor.getSession().getValue();
+			template.deviceType = $("select[name='deviceType']").val();
 			DeviceTemplates.update(
-				{_id: device._id}, //Select
+				{_id: template._id}, //Select
 				{$set : {
-					contents: device.contents
+					contents: template.contents,
+					deviceType: template.deviceType
 				}});
 			// device.save();
 			$("#editingTemplateStatus").text("Saved at " + moment().format("HH:mm"));
 		}
 	});
-}
 
-//Title Helper
-Template.templateEditor.helpers({
-	editingTemplate: function() {
-		var id = Session.get("DeviceTemplates_selected");
-		if(id) {
-			var device = DeviceTemplates.findOne({_id: id});
-			return device.name;
-		}
-	}
-});
+	//Build the editor window
+	AceEditor.instance("templateEditor",{
+		theme:"dawn",
+		mode:"text",
+		maxLines: Infinity
+	}, function(editor) {
+		//This function gets called when the editor is ready
+		editor.blockScrolling = Infinity;
+		editor.on("change", function(e) {
+			$("#editingTemplateStatus").text("Not Saved");
+		});
+		// debugger;
+		hookTemplateRender();
+	});
+
+}
